@@ -139,23 +139,23 @@
             <form id="formAdministrarPelicula">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Código</label>
-                <input type="text" class="form-control" id="recipient-name" placeholder="-" disabled>
+                <input type="text" class="form-control" id="codigo" placeholder="-" disabled>
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Titulo *</label>
-                <input type="text" class="form-control" id="recipient-name"  placeholder="Ej: Capitan América" required minlength="2" maxlength="50">
+                <input type="text" class="form-control" id="titulo"  placeholder="Ej: Capitan América" >
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Descripcion *</label>
-                <input type="text" class="form-control" id="recipient-name"   placeholder="Ej: Lorem ipsum dolor sit amet" required minlength="10" maxlength="300" >
+                <input type="text" class="form-control" id="descripcion"   placeholder="Ej: Lorem ipsum dolor sit amet"  >
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Imagen *</label>
-                <input type="text" class="form-control" id="recipient-name"  placeholder="Ej: http://127.0.0.1:5500/pages/administrador.html" required minlength="10" maxlength="300">
+                <input type="text" class="form-control" id="imagen"  placeholder="Ej: http://127.0.0.1:5500/pages/administrador.html" >
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Genero *</label>
-                <select class="form-select" aria-label="Elegir Genero" required>
+                <select class="form-select" aria-label="Elegir Genero" id="genero" >
                   <option selected>Seleccione una opcion</option>
                   <option value="1">Aventura</option>
                   <option value="2">Accion</option>
@@ -165,24 +165,27 @@
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Año *</label>
-                <input type="number" class="form-control" id="recipient-name" placeholder="Ej: 2023" required min="1900" max="2023">
+                <input type="number" class="form-control" id="anio" placeholder="Ej: 2023" >
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Duración *</label>
-                <input type="number" class="form-control" id="recipient-name" placeholder="Ej: 93 min" required min="30" max="300">
+                <input type="number" class="form-control" id="duracion" placeholder="Ej: 93 min" >
               </div>
               <div class="mb-3">
                 <label class="col-form-label">País</label>
-                <input type="text" class="form-control" id="recipient-name" placeholder="Ej: Argentina">
+                <input type="text" class="form-control" id="pais" placeholder="Ej: Argentina">
               </div>
               <div class="mb-3">
                 <label class="col-form-label">Reparto <span class="text-muted text-sm">(Cada actor separado por
                     ,)</span></label>
-                <input type="text" class="form-control" id="recipient-name"
+                <input type="text" class="form-control" id="reparto"
                   placeholder="Ej: Chris Pratt, Anya Taylor-Joy, Charlie Day, Jack Black">
               </div>
               <div class="justify-content-start">
                 <button type="submit"  class="btn btn-primary">Enviar</button>
+              </div>
+              <div class="alert alert-danger my-3 d-none" id="msjFormulario" role="alert">
+
               </div>
             </form>
           </div>
