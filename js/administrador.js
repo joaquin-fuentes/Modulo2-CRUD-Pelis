@@ -39,7 +39,7 @@ function cargarPelicula(e) {
     e.preventDefault();
 
     //validar los datos
-    let sumario = sumarioValidaciones(titulo.value, descripcion.value, imagen.value, duracion.value)
+    let sumario = sumarioValidaciones(titulo.value, descripcion.value, imagen.value, duracion.value, genero.value, anio.value, pais.value, reparto.value)
     if (sumario.length === 0) {
         console.log("Estoy creando la pelicula");
         //crear la pelicula

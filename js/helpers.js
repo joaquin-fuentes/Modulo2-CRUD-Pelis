@@ -1,4 +1,6 @@
 
+let anioActual;
+
 export function cantidadCaracteres(texto, min, max) {
     if (texto.length >= min && texto.length <= max) {
         console.log("Cantidad de caracteres CORRECTO");
@@ -30,7 +32,33 @@ export function cantidadCaracteres(texto, min, max) {
         return false
     }
  }
-export function sumarioValidaciones(titulo, descripcion, imagen, duracion) {
+ function validarGenero(texto){
+    if(texto.length > 0 && (texto === "Aventura" || texto === "Accion" || texto === "Drama" || texto === "Terror")){
+        console.log("Genero valido");
+        return true
+    } else{
+        console.log("Genero INVALIDO");
+        return false
+    }
+ }
+// Agregar validacion de año desde 1985 hasta año actual +1
+function validarAnio(anio){
+     anioActual = new Date().getFullYear();
+    if(anio >= 1985 && anio <= anioActual+1){
+        console.log("Año valido");
+        return true
+    } else{
+        console.log("Año INVALIDO");
+        return false
+    }
+ }
+// Agregar validacion de Pais = Igual al titulo
+
+// Agregar validacion de Reparto = Igual a la del titulo
+
+
+//Video de la clase va en tiempo 1hora 30minutos...
+export function sumarioValidaciones(titulo, descripcion, imagen, duracion, genero, anio, pais, reparto) {
     let resumen = "";
     if (!cantidadCaracteres(titulo, 3, 50)) {
         resumen += "- Corregir el campo del título: debe contener entre 3 y 50 caracteres <br>";
@@ -42,7 +70,19 @@ export function sumarioValidaciones(titulo, descripcion, imagen, duracion) {
         resumen += "- Corregir la duracion, debe ser un numero de 3 digitos como maximo <br>";
     }
     if (!validarURLImagen(imagen)) {
-        resumen += "- Corregir la URL de la imagen <br>";
+        resumen += "- Corregir la URL de la imagen, la extension debe ser: .jpg .png o .gif <br>";
+    }
+    if (!validarGenero(genero)) {
+        resumen += "- Seleccion un genero de la lista de opciones  <br>";
+    }
+    if (!validarAnio(anio)) {
+        resumen += `- El año debe ser entre 1985 y ${anioActual+1}`;
+    }
+    if (!cantidadCaracteres(pais, 3, 20)) {
+        resumen += "- El Paìs: debe contener entre 3 y 20 caracteres <br>";
+    }
+    if (!cantidadCaracteres(reparto, 3, 100)) {
+        resumen += "- El reparto: debe contener entre 3 y 100 caracteres <br>";
     }
     if (resumen.length !== 0) {
         return resumen;
