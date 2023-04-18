@@ -43,7 +43,15 @@ function cargarPelicula(e) {
     if (sumario.length === 0) {
         console.log("Estoy creando la pelicula");
         //crear la pelicula
+        let nuevaPeli = new Pelicula(titulo.value, descripcion.value, imagen.value, genero.value, anio.value, duracion.value, pais.value, reparto.value)
+        listaPeliculas.push(nuevaPeli);
         //almacenar la peli en localstorage
+        console.log(listaPeliculas)
+        console.log(JSON.stringify(listaPeliculas))
+        localStorage.setItem("listaPeliculas", JSON.stringify(listaPeliculas)) //para objetos publicos funciona bien
+
+        //limpar el formulario
+        
         //crear modal
         modalPelicula.hide();
 
