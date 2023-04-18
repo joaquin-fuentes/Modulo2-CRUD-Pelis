@@ -15,7 +15,9 @@ const pais = document.querySelector("#pais");
 const msjFormulario = document.querySelector("#msjFormulario");
 
 const formAdministrarPelicula = document.getElementById("formAdministrarPelicula");
-let listaPeliculas = [];
+
+//trabajar las peliculas para que vuelvan a ser un objeto Pelicula.
+let listaPeliculas = JSON.parse(localStorage.getItem("listaPeliculas")) || [];
 
 btnEditar.addEventListener("click", crearPeli);
 btnAgregar.addEventListener("click", mostrarModalPeli);
@@ -46,12 +48,10 @@ function cargarPelicula(e) {
         let nuevaPeli = new Pelicula(titulo.value, descripcion.value, imagen.value, genero.value, anio.value, duracion.value, pais.value, reparto.value)
         listaPeliculas.push(nuevaPeli);
         //almacenar la peli en localstorage
-        console.log(listaPeliculas)
-        console.log(JSON.stringify(listaPeliculas))
-        localStorage.setItem("listaPeliculas", JSON.stringify(listaPeliculas)) //para objetos publicos funciona bien
 
+        guardarEnLocalStorage()
         //limpar el formulario
-        
+        limpiarFormularioPeliculas()
         //crear modal
         modalPelicula.hide();
 
@@ -59,4 +59,12 @@ function cargarPelicula(e) {
         msjFormulario.className = "alert alert-danger mt-3";
         msjFormulario.innerHTML = sumario;
     }
+}
+
+function guardarEnLocalStorage() {
+    localStorage.setItem("listaPeliculas", JSON.stringify(listaPeliculas)) //para objetos publicos funciona bien
+
+}
+function limpiarFormularioPeliculas() {
+    formAdministrarPelicula.reset()
 }
