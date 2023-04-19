@@ -89,12 +89,10 @@ function crearPeli() {
     "EEUU",
     "-"
   );
-  console.log(nuevaPeli);
 }
 function mostrarModalPeli() {
   // abrir ventana modal
   modalPelicula.show();
-  console.log("Aqui vamos a crear una peli");
 }
 
 function cargarPelicula(e) {
@@ -112,7 +110,6 @@ function cargarPelicula(e) {
     reparto.value
   );
   if (sumario.length === 0) {
-    console.log("Estoy creando la pelicula");
     //crear la pelicula
     let nuevaPeli = new Pelicula(
       titulo.value,
