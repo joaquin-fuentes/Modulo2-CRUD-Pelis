@@ -66,7 +66,7 @@ export function sumarioValidaciones(titulo, descripcion, imagen, duracion, gener
     if (!cantidadCaracteres(descripcion, 3, 100)) {
         resumen += "- Corregir el campo de la descripcion: debe contener entre 3 y 100 caracteres <br>";
     }
-    if (!validarDuracion(duracion)) {
+    if (duracion.length !== 0 && !validarDuracion(parseInt(duracion))) {
         resumen += "- Corregir la duracion, debe ser un numero de 3 digitos como maximo <br>";
     }
     if (!validarURLImagen(imagen)) {
@@ -75,13 +75,13 @@ export function sumarioValidaciones(titulo, descripcion, imagen, duracion, gener
     if (!validarGenero(genero)) {
         resumen += "- Seleccion un genero de la lista de opciones  <br>";
     }
-    if (!validarAnio(anio)) {
+    if (anio.length !== 0 &&!validarAnio(parseInt(anio))) {
         resumen += `- El año debe ser entre 1985 y ${anioActual+1}`;
     }
-    if (!cantidadCaracteres(pais, 3, 20)) {
+    if (pais.length !== 0 && !cantidadCaracteres(pais, 3, 20)) {
         resumen += "- El Paìs: debe contener entre 3 y 20 caracteres <br>";
     }
-    if (!cantidadCaracteres(reparto, 3, 100)) {
+    if (reparto.length !== 0 && !cantidadCaracteres(reparto, 3, 100)) {
         resumen += "- El reparto: debe contener entre 3 y 100 caracteres <br>";
     }
     if (resumen.length !== 0) {
