@@ -133,6 +133,9 @@ function cargarPelicula(e) {
     limpiarFormularioPeliculas();
     //crear modal
     modalPelicula.hide();
+    //dibujar la fila al final de la tabla
+    let indicePeli = listaPeliculas.length - 1
+    crearFila(nuevaPeli, indicePeli)
   } else {
     msjFormulario.className = "alert alert-danger mt-3";
     msjFormulario.innerHTML = sumario;
