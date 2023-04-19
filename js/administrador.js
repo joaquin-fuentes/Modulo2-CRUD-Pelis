@@ -17,7 +17,9 @@ const msjFormulario = document.querySelector("#msjFormulario");
 const formAdministrarPelicula = document.getElementById(
   "formAdministrarPelicula"
 );
-
+const modalPelicula = new bootstrap.Modal(
+  document.querySelector("#modalAgregar")
+);
 
 btnEditar.addEventListener("click", crearPeli);
 btnAgregar.addEventListener("click", mostrarModalPeli);
@@ -45,14 +47,36 @@ if (!listaPeliculas) {
         pelicula.reparto
       )
   );
-  console.log(listaPeliculas)
+  console.log(listaPeliculas);
+}
+cargaInicial();
+function cargaInicial() {
+  //verificar si listaPOeliculas tiene datos
+  if (listaPeliculas.length >= 0) {
+    //dibuja los datos en la tabla
+    listaPeliculas.map((pelicula) => crearFila(pelicula));
+  } else {
+    //mostrar un msj que no hay datos para mostrar o dejo la tabla vacia
+  }
 }
 
-
-
-const modalPelicula = new bootstrap.Modal(
-  document.querySelector("#modalAgregar")
-);
+function crearFila(pelicula) {
+  //aqui dibujo el tr
+  let datosTablaPelicula = document.querySelector("tbody");
+  console.log(datosTablaPelicula);
+  datosTablaPelicula.innerHTML += `
+    <tr>
+    <th>1</th>
+    <td>${pelicula.titulo}</td>
+    <td class="text-truncate d-none d-sm-table-cell ">${pelicula.descripcion}</td>
+    <td class="text-truncate d-none d-sm-table-cell">${pelicula.imagen}</td>
+    <td>${pelicula.genero}</td>
+    <td>
+          <button class="bi bi-pencil-square btn btn-warning m-1" id="btnEditar"></button>
+          <button class="bi bi-x-square btn btn-danger m-1"></button></td>
+  </tr>
+    `;
+}
 
 function crearPeli() {
   let nuevaPeli = new Pelicula(
