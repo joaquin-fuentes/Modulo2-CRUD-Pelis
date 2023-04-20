@@ -47,7 +47,6 @@ if (!listaPeliculas) {
         pelicula.reparto
       )
   );
-  console.log(listaPeliculas);
 }
 cargaInicial();
 function cargaInicial() {
@@ -63,12 +62,13 @@ function cargaInicial() {
 function crearFila(pelicula, indice) {
   //aqui dibujo el tr
   let datosTablaPelicula = document.querySelector("tbody");
-  console.log(datosTablaPelicula);
   datosTablaPelicula.innerHTML += `
     <tr>
-    <th>${indice+1}</th>
+    <th>${indice + 1}</th>
     <td>${pelicula.titulo}</td>
-    <td class="text-truncate d-none d-sm-table-cell ">${pelicula.descripcion}</td>
+    <td class="text-truncate d-none d-sm-table-cell ">${
+      pelicula.descripcion
+    }</td>
     <td class="text-truncate d-none d-sm-table-cell">${pelicula.imagen}</td>
     <td>${pelicula.genero}</td>
     <td>
@@ -78,18 +78,18 @@ function crearFila(pelicula, indice) {
     `;
 }
 
-function crearPeli() {
-  let nuevaPeli = new Pelicula(
-    "Super mario",
-    "algo",
-    "url",
-    "aventura",
-    2023,
-    "2hs",
-    "EEUU",
-    "-"
-  );
-}
+// function crearPeli() {
+//   let nuevaPeli = new Pelicula(
+//     "Super mario",
+//     "algo",
+//     "url",
+//     "aventura",
+//     2023,
+//     "2hs",
+//     "EEUU",
+//     "-"
+//   );
+// }
 function mostrarModalPeli() {
   // abrir ventana modal
   modalPelicula.show();
@@ -131,8 +131,12 @@ function cargarPelicula(e) {
     //crear modal
     modalPelicula.hide();
     //dibujar la fila al final de la tabla
-    let indicePeli = listaPeliculas.length - 1
-    crearFila(nuevaPeli, indicePeli)
+    let indicePeli = listaPeliculas.length - 1;
+    crearFila(nuevaPeli, indicePeli);
+    //mostrar cartel al usuario de crear peli correcatamente
+    Swal.fire("Pelicula creada", "La pelicula ingresada fue creada correctamente", "success");
+    //tarea verificar cantidad de caracteres en el campo de la descripcion
+    // ocultar pasado x tiempo o una vez enviada la pelicula el alert con los errores
   } else {
     msjFormulario.className = "alert alert-danger mt-3";
     msjFormulario.innerHTML = sumario;

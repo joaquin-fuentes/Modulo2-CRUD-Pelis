@@ -3,10 +3,10 @@ let anioActual;
 
 export function cantidadCaracteres(texto, min, max) {
     if (texto.length >= min && texto.length <= max) {
-        console.log("Cantidad de caracteres CORRECTO");
+        // console.log("Cantidad de caracteres CORRECTO");
         return true;
     } else {
-        console.log("cantidad de caracteres INCORRECTO")
+        // console.log("cantidad de caracteres INCORRECTO")
         return false;
     }
 }
@@ -14,10 +14,10 @@ export function cantidadCaracteres(texto, min, max) {
  function validarDuracion(value){
     let patron = /^[0-9]{1,3}$/;
     if(patron.test(value)){
-        console.log("digito valido de 1 a 3 caracteres");
+        // console.log("digito valido de 1 a 3 caracteres");
         return true
     } else{
-        console.log("digito no paso la expresion regular del tiempo");
+        // console.log("digito no paso la expresion regular del tiempo");
         return false
     }
  }
@@ -25,19 +25,19 @@ export function cantidadCaracteres(texto, min, max) {
     let patron =  /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)$/
     ;
     if(patron.test(value)){
-        console.log("URL Valida");
+        // console.log("URL Valida");
         return true
     } else{
-        console.log("URL de imagen NO valida");
+        // console.log("URL de imagen NO valida");
         return false
     }
  }
  function validarGenero(texto){
     if(texto.length > 0 && (texto === "Aventura" || texto === "Accion" || texto === "Drama" || texto === "Terror")){
-        console.log("Genero valido");
+        // console.log("Genero valido");
         return true
     } else{
-        console.log("Genero INVALIDO");
+        // console.log("Genero INVALIDO");
         return false
     }
  }
@@ -45,10 +45,10 @@ export function cantidadCaracteres(texto, min, max) {
 function validarAnio(anio){
      anioActual = new Date().getFullYear();
     if(anio >= 1985 && anio <= anioActual+1){
-        console.log("Año valido");
+        // console.log("Año valido");
         return true
     } else{
-        console.log("Año INVALIDO");
+        // console.log("Año INVALIDO");
         return false
     }
  }
@@ -63,7 +63,7 @@ export function sumarioValidaciones(titulo, descripcion, imagen, duracion, gener
     if (!cantidadCaracteres(titulo, 3, 50)) {
         resumen += "- Corregir el campo del título: debe contener entre 3 y 50 caracteres <br>";
     }
-    if (!cantidadCaracteres(descripcion, 3, 100)) {
+    if (!cantidadCaracteres(descripcion, 3, 400)) {
         resumen += "- Corregir el campo de la descripcion: debe contener entre 3 y 100 caracteres <br>";
     }
     if (duracion.length !== 0 && !validarDuracion(parseInt(duracion))) {
@@ -87,7 +87,7 @@ export function sumarioValidaciones(titulo, descripcion, imagen, duracion, gener
     if (resumen.length !== 0) {
         return resumen;
     } else {
-        console.log("Todo esta ok con el formulario")
+        // console.log("Todo esta ok con el formulario")
         return "";
     }
 }
