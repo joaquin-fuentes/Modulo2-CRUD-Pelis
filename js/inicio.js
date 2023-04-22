@@ -7,9 +7,6 @@ let listaPeliculas = localStorage.getItem("listaPeliculas");
 if (!listaPeliculas) {
   // si listapeliculas no existe en localstorage
   listaPeliculas = [];
-  seccionPeliculas.innerHTML = `
-  <h2 class="text-center my-4">Aún no hay peliculas cargadas</h2>
-  `
 } else {
   // si listaPeliculas tiene datos, quiero trasnformarlo en un array de objetos Pelicula
   listaPeliculas = JSON.parse(listaPeliculas).map(
@@ -35,12 +32,15 @@ function cargaInicial() {
     //dibuja los datos en la tabla
     listaPeliculas.map((pelicula) => mostrarPelicula(pelicula));
   } else {
-    //mostrar un msj que no hay datos para mostrar o dejo la tabla vacia
+    //mostrar un msj que no hay datos para mostrar 
+    seccionPeliculas.innerHTML = `
+    <h2 class="text-center my-4">Aún no hay peliculas cargadas</h2>
+    `
   }
 }
 
 function mostrarPelicula(pelicula) {
-  //aqui dibujo el tr
+  //aqui dibujo el article
   
   seccionPeliculas.innerHTML += `
   <article class="col-12 col-md-4 col-lg-3 mb-3">
