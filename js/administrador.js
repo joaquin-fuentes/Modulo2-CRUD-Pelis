@@ -13,6 +13,7 @@ const anio = document.querySelector("#anio");
 const reparto = document.querySelector("#reparto");
 const pais = document.querySelector("#pais");
 const msjFormulario = document.querySelector("#msjFormulario");
+const spanDescripcion = document.querySelector("#spanDescripcion")
 
 const formAdministrarPelicula = document.getElementById(
   "formAdministrarPelicula"
@@ -24,6 +25,7 @@ const modalPelicula = new bootstrap.Modal(
 // btnEditar.addEventListener("click", crearPeli);
 btnAgregar.addEventListener("click", mostrarModalPeli);
 formAdministrarPelicula.addEventListener("submit", cargarPelicula);
+descripcion.addEventListener("input", cantidadLetrasDescripcion)
 
 //trabajar las peliculas para que vuelvan a ser un objeto Pelicula.
 // let listaPeliculas = JSON.parse(localStorage.getItem("listaPeliculas")) || []; ESTO DEVUELVE UN ARRAY DE OBJETOS DE TIPO "OBJET"
@@ -156,4 +158,20 @@ window.borrarPelicula = ()=>{
   
   console.log("Aqui borro la peli")
 
+}
+
+function cantidadLetrasDescripcion (){
+    let caracteresRestantes = 400
+    let numCaracteres = descripcion.value.length;
+     caracteresRestantes = caracteresRestantes - numCaracteres
+    console.log(caracteresRestantes)
+    spanDescripcion.innerHTML = `
+         <span class="text-success">${caracteresRestantes}</span>
+    `
+    if(caracteresRestantes < 0){
+      spanDescripcion.innerHTML = `
+      <span class="text-danger">${caracteresRestantes}</span>
+ `
+    }
+    
 }
