@@ -139,10 +139,18 @@ function cargarPelicula(e) {
     Swal.fire("Pelicula creada", "La pelicula ingresada fue creada correctamente", "success");
     //tarea verificar cantidad de caracteres en el campo de la descripcion
     // ocultar pasado x tiempo o una vez enviada la pelicula el alert con los errores
+    ocultarAlerError()
   } else {
     msjFormulario.className = "alert alert-danger mt-3";
     msjFormulario.innerHTML = sumario;
+    setTimeout(ocultarAlerError, 8000)
   }
+}
+
+function ocultarAlerError(){
+   msjFormulario.className = "d-none"
+   msjFormulario.innerHTML = "";
+
 }
 
 function guardarEnLocalStorage() {
@@ -161,7 +169,7 @@ window.borrarPelicula = ()=>{
 }
 
 function cantidadLetrasDescripcion (){
-    let caracteresRestantes = 400
+    let caracteresRestantes = 500
     let numCaracteres = descripcion.value.length;
      caracteresRestantes = caracteresRestantes - numCaracteres
     console.log(caracteresRestantes)

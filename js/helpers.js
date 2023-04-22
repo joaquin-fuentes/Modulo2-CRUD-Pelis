@@ -63,8 +63,8 @@ export function sumarioValidaciones(titulo, descripcion, imagen, duracion, gener
     if (!cantidadCaracteres(titulo, 3, 50)) {
         resumen += "- Corregir el campo del título: debe contener entre 3 y 50 caracteres <br>";
     }
-    if (!cantidadCaracteres(descripcion, 3, 400)) {
-        resumen += "- Corregir el campo de la descripcion: debe contener entre 3 y 100 caracteres <br>";
+    if (!cantidadCaracteres(descripcion, 3, 500)) {
+        resumen += "- Corregir el campo de la descripcion: debe contener entre 3 y 400 caracteres <br>";
     }
     if (duracion.length !== 0 && !validarDuracion(parseInt(duracion))) {
         resumen += "- Corregir la duracion, debe ser un numero de 3 digitos como maximo <br>";
