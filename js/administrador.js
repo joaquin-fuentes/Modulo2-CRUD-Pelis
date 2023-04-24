@@ -75,10 +75,8 @@ function crearFila(pelicula, indice) {
     <td class="text-truncate d-none d-sm-table-cell">${pelicula.imagen}</td>
     <td>${pelicula.genero}</td>
     <td>
-          <button class="bi bi-pencil-square btn btn-warning m-1" id="btnEditar"></button>
-          <button class="bi bi-x-square btn btn-danger m-1"  onclick="borrarPelicula('${
-            pelicula.codigo
-          }')"></button></td>
+          <button class="bi bi-pencil-square btn btn-warning m-1" id="btnEditar" onclick="editarPelicula('${pelicula.codigo}')"></button>
+          <button class="bi bi-x-square btn btn-danger m-1"  onclick="borrarPelicula('${pelicula.codigo}')"></button></td>
   </tr>
     `;
 }
@@ -155,6 +153,21 @@ function limpiarFormularioPeliculas() {
   formAdministrarPelicula.reset();
 }
 
+
+function cantidadLetrasDescripcion() {
+  let caracteresRestantes = 500;
+  let numCaracteres = descripcion.value.length;
+  caracteresRestantes = caracteresRestantes - numCaracteres;
+  spanDescripcion.innerHTML = `
+         <span class="text-success">${caracteresRestantes}</span>
+    `;
+  if (caracteresRestantes < 0) {
+    spanDescripcion.innerHTML = `
+      <span class="text-danger">${caracteresRestantes}</span>
+ `;
+  }
+}
+
 window.borrarPelicula = (codigo) => {
   Swal.fire({
     title: "Estás seguro de borrar la película?",
@@ -191,16 +204,26 @@ window.borrarPelicula = (codigo) => {
   });
 };
 
-function cantidadLetrasDescripcion() {
-  let caracteresRestantes = 500;
-  let numCaracteres = descripcion.value.length;
-  caracteresRestantes = caracteresRestantes - numCaracteres;
-  spanDescripcion.innerHTML = `
-         <span class="text-success">${caracteresRestantes}</span>
-    `;
-  if (caracteresRestantes < 0) {
-    spanDescripcion.innerHTML = `
-      <span class="text-danger">${caracteresRestantes}</span>
- `;
-  }
+window.editarPelicula = (codigoUnico)=>{
+  console.log("aqui estoy editando pelicula")
+  const pelicula = listaPeliculas.find(peli => peli.codigo === codigoUnico)
+  console.log(pelicula)
+  //mostrar ventana modal
+  modalPelicula.show()
+
+  // completar los datos en el modal
+  codigo.value = pelicula.codigo;
+  titulo.value = pelicula.titulo;
+  descripcion.value = pelicula.descripcion;
+  imagen.value = pelicula.imagen;
+  genero.value = pelicula.genero;
+  anio.value = pelicula.anio;
+  duracion.value = pelicula.duracion;
+  pais.value = pelicula.pais;
+  reparto.value = pelicula.reparto;
+
+  
+
 }
+
+
