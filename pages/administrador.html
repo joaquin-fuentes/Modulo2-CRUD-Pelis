@@ -156,6 +156,9 @@
                     class="form-control"
                     id="titulo"
                     placeholder="Ej: Capitan América"
+                    required
+                    minlength="3"
+                    maxlength="50"
                   />
                 </div>
                 <div class="mb-3">
@@ -165,6 +168,9 @@
                     class="form-control"
                     id="descripcion"
                     placeholder="Ej: Lorem ipsum dolor sit amet"
+                    required
+                    minlength="3"
+                    maxlength="500"
                   ></textarea>
                 </div>
                 <div class="mb-3">
@@ -174,6 +180,7 @@
                     class="form-control"
                     id="imagen"
                     placeholder="Ej: http://127.0.0.1:5500/pages/administrador.html"
+                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -182,6 +189,7 @@
                     class="form-select"
                     aria-label="Elegir Genero"
                     id="genero"
+                    required
                   >
                     <option selected value="">Seleccione una opcion</option>
                     <option value="Aventura">Aventura</option>
