@@ -13,7 +13,7 @@ const anio = document.querySelector("#anio");
 const reparto = document.querySelector("#reparto");
 const pais = document.querySelector("#pais");
 const msjFormulario = document.querySelector("#msjFormulario");
-const spanDescripcion = document.querySelector("#spanDescripcion")
+const spanDescripcion = document.querySelector("#spanDescripcion");
 
 const formAdministrarPelicula = document.getElementById(
   "formAdministrarPelicula"
@@ -25,7 +25,7 @@ const modalPelicula = new bootstrap.Modal(
 // btnEditar.addEventListener("click", crearPeli);
 btnAgregar.addEventListener("click", mostrarModalPeli);
 formAdministrarPelicula.addEventListener("submit", cargarPelicula);
-descripcion.addEventListener("input", cantidadLetrasDescripcion)
+descripcion.addEventListener("input", cantidadLetrasDescripcion);
 
 //trabajar las peliculas para que vuelvan a ser un objeto Pelicula.
 // let listaPeliculas = JSON.parse(localStorage.getItem("listaPeliculas")) || []; ESTO DEVUELVE UN ARRAY DE OBJETOS DE TIPO "OBJET"
@@ -39,6 +39,7 @@ if (!listaPeliculas) {
   listaPeliculas = JSON.parse(listaPeliculas).map(
     (pelicula) =>
       new Pelicula(
+        pelicula.codigo,
         pelicula.titulo,
         pelicula.descripcion,
         pelicula.imagen,
@@ -75,23 +76,11 @@ function crearFila(pelicula, indice) {
     <td>${pelicula.genero}</td>
     <td>
           <button class="bi bi-pencil-square btn btn-warning m-1" id="btnEditar"></button>
-          <button class="bi bi-x-square btn btn-danger m-1"  onclick="borrarPelicula()"></button></td>
+          <button class="bi bi-x-square btn btn-danger m-1"  onclick="borrarPelicula('${pelicula.codigo}')"></button></td>
   </tr>
     `;
 }
 
-// function crearPeli() {
-//   let nuevaPeli = new Pelicula(
-//     "Super mario",
-//     "algo",
-//     "url",
-//     "aventura",
-//     2023,
-//     "2hs",
-//     "EEUU",
-//     "-"
-//   );
-// }
 function mostrarModalPeli() {
   // abrir ventana modal
   modalPelicula.show();
@@ -114,6 +103,7 @@ function cargarPelicula(e) {
   if (sumario.length === 0) {
     //crear la pelicula
     let nuevaPeli = new Pelicula(
+      undefined,
       titulo.value,
       descripcion.value,
       imagen.value,
@@ -136,21 +126,24 @@ function cargarPelicula(e) {
     let indicePeli = listaPeliculas.length - 1;
     crearFila(nuevaPeli, indicePeli);
     //mostrar cartel al usuario de crear peli correcatamente
-    Swal.fire("Pelicula creada", "La pelicula ingresada fue creada correctamente", "success");
+    Swal.fire(
+      "Pelicula creada",
+      "La pelicula ingresada fue creada correctamente",
+      "success"
+    );
     //tarea verificar cantidad de caracteres en el campo de la descripcion
     // ocultar pasado x tiempo o una vez enviada la pelicula el alert con los errores
-    ocultarAlerError()
+    ocultarAlerError();
   } else {
     msjFormulario.className = "alert alert-danger mt-3";
     msjFormulario.innerHTML = sumario;
-    setTimeout(ocultarAlerError, 8000)
+    setTimeout(ocultarAlerError, 8000);
   }
 }
 
-function ocultarAlerError(){
-   msjFormulario.className = "d-none"
-   msjFormulario.innerHTML = "";
-
+function ocultarAlerError() {
+  msjFormulario.className = "d-none";
+  msjFormulario.innerHTML = "";
 }
 
 function guardarEnLocalStorage() {
@@ -160,26 +153,21 @@ function limpiarFormularioPeliculas() {
   formAdministrarPelicula.reset();
 }
 
+window.borrarPelicula = (codigo) => {
+  console.log("Aqui borro la peli");
+  console.log(codigo)
+};
 
-
-window.borrarPelicula = ()=>{
-  
-  console.log("Aqui borro la peli")
-
-}
-
-function cantidadLetrasDescripcion (){
-    let caracteresRestantes = 500
-    let numCaracteres = descripcion.value.length;
-     caracteresRestantes = caracteresRestantes - numCaracteres
-    console.log(caracteresRestantes)
-    spanDescripcion.innerHTML = `
+function cantidadLetrasDescripcion() {
+  let caracteresRestantes = 500;
+  let numCaracteres = descripcion.value.length;
+  caracteresRestantes = caracteresRestantes - numCaracteres;
+  spanDescripcion.innerHTML = `
          <span class="text-success">${caracteresRestantes}</span>
-    `
-    if(caracteresRestantes < 0){
-      spanDescripcion.innerHTML = `
+    `;
+  if (caracteresRestantes < 0) {
+    spanDescripcion.innerHTML = `
       <span class="text-danger">${caracteresRestantes}</span>
- `
-    }
-    
+ `;
+  }
 }

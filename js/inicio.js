@@ -12,6 +12,7 @@ if (!listaPeliculas) {
   listaPeliculas = JSON.parse(listaPeliculas).map(
     (pelicula) =>
       new Pelicula(
+        pelicula.codigo,
         pelicula.titulo,
         pelicula.descripcion,
         pelicula.imagen,
@@ -32,16 +33,16 @@ function cargaInicial() {
     //dibuja los datos en la tabla
     listaPeliculas.map((pelicula) => mostrarPelicula(pelicula));
   } else {
-    //mostrar un msj que no hay datos para mostrar 
+    //mostrar un msj que no hay datos para mostrar
     seccionPeliculas.innerHTML = `
     <h2 class="text-center my-4">Aún no hay peliculas cargadas</h2>
-    `
+    `;
   }
 }
 
 function mostrarPelicula(pelicula) {
   //aqui dibujo el article
-  
+
   seccionPeliculas.innerHTML += `
   <article class="col-12 col-md-4 col-lg-3 mb-3">
   <div class="card h-100">
