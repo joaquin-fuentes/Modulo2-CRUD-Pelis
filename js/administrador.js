@@ -14,6 +14,8 @@ const reparto = document.querySelector("#reparto");
 const pais = document.querySelector("#pais");
 const msjFormulario = document.querySelector("#msjFormulario");
 const spanDescripcion = document.querySelector("#spanDescripcion");
+const datosTablaPelicula = document.querySelector("tbody");
+
 
 const formAdministrarPelicula = document.getElementById(
   "formAdministrarPelicula"
@@ -64,7 +66,6 @@ function cargaInicial() {
 
 function crearFila(pelicula, indice) {
   //aqui dibujo el tr
-  let datosTablaPelicula = document.querySelector("tbody");
   datosTablaPelicula.innerHTML += `
     <tr>
     <th>${indice + 1}</th>
@@ -156,6 +157,22 @@ function limpiarFormularioPeliculas() {
 window.borrarPelicula = (codigo) => {
   console.log("Aqui borro la peli");
   console.log(codigo)
+  // busco en el array de peliculas la peli que quiero borrar
+  let posicionPeli = listaPeliculas.findIndex(pelicula => pelicula.codigo === codigo )
+  console.log(posicionPeli)
+
+  // borrar del array el objeto pelicula
+  listaPeliculas.splice(posicionPeli, 1)
+
+  // igualar los datos del localstorage
+  guardarEnLocalStorage()
+
+  // quitar la fila de la tabla
+  // datosTablaPelicula.children[posicionPeli].remove
+  datosTablaPelicula.removeChild(datosTablaPelicula.children[posicionPeli])
+
+  // actualizar las filas de la tabla
+  
 };
 
 function cantidadLetrasDescripcion() {
