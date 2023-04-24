@@ -29,14 +29,14 @@ if (!listaPeliculas) {
 cargaInicial();
 function cargaInicial() {
   //verificar si listaPOeliculas tiene datos
-  if (listaPeliculas.length >= 0) {
+  if (listaPeliculas.length > 0) {
     //dibuja los datos en la tabla
     listaPeliculas.map((pelicula) => mostrarPelicula(pelicula));
-  } else {
-    //mostrar un msj que no hay datos para mostrar
-    seccionPeliculas.innerHTML = `
-    <h2 class="text-center my-4">Aún no hay peliculas cargadas</h2>
-    `;
+  }else{
+      //mostrar un msj que no hay datos para mostrar
+      seccionPeliculas.innerHTML = `
+      <h2 class="text-center my-4">Aún no hay peliculas cargadas</h2>
+      `;
   }
 }
 

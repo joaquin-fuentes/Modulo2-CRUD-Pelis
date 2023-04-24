@@ -16,7 +16,6 @@ const msjFormulario = document.querySelector("#msjFormulario");
 const spanDescripcion = document.querySelector("#spanDescripcion");
 const datosTablaPelicula = document.querySelector("tbody");
 
-
 const formAdministrarPelicula = document.getElementById(
   "formAdministrarPelicula"
 );
@@ -77,7 +76,9 @@ function crearFila(pelicula, indice) {
     <td>${pelicula.genero}</td>
     <td>
           <button class="bi bi-pencil-square btn btn-warning m-1" id="btnEditar"></button>
-          <button class="bi bi-x-square btn btn-danger m-1"  onclick="borrarPelicula('${pelicula.codigo}')"></button></td>
+          <button class="bi bi-x-square btn btn-danger m-1"  onclick="borrarPelicula('${
+            pelicula.codigo
+          }')"></button></td>
   </tr>
     `;
 }
@@ -155,24 +156,39 @@ function limpiarFormularioPeliculas() {
 }
 
 window.borrarPelicula = (codigo) => {
-  console.log("Aqui borro la peli");
-  console.log(codigo)
-  // busco en el array de peliculas la peli que quiero borrar
-  let posicionPeli = listaPeliculas.findIndex(pelicula => pelicula.codigo === codigo )
-  console.log(posicionPeli)
+  Swal.fire({
+    title: "Estás seguro de borrar la película?",
+    text: "Si lo haces no podrás revertir el proceso",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, estoy seguro",
+    cancelButtonText: "Cancelar"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //Si el usuario presiona OK
+      // busco en el array de peliculas la peli que quiero borrar
+      let posicionPeli = listaPeliculas.findIndex(
+        (pelicula) => pelicula.codigo === codigo
+      );
+      console.log(posicionPeli);
 
-  // borrar del array el objeto pelicula
-  listaPeliculas.splice(posicionPeli, 1)
+      // borrar del array el objeto pelicula
+      listaPeliculas.splice(posicionPeli, 1);
 
-  // igualar los datos del localstorage
-  guardarEnLocalStorage()
+      // igualar los datos del localstorage
+      guardarEnLocalStorage();
 
-  // quitar la fila de la tabla
-  // datosTablaPelicula.children[posicionPeli].remove
-  datosTablaPelicula.removeChild(datosTablaPelicula.children[posicionPeli])
+      // quitar la fila de la tabla
+      // datosTablaPelicula.children[posicionPeli].remove
+      datosTablaPelicula.removeChild(datosTablaPelicula.children[posicionPeli]);
 
-  // actualizar las filas de la tabla
-  
+      // hacer: actualizar las filas de la tabla
+
+      Swal.fire("Registro ELIMINADO", "Se elímino la pelicula de la base de datos", "success");
+    }
+  });
 };
 
 function cantidadLetrasDescripcion() {
