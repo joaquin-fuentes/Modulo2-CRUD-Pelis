@@ -15,13 +15,10 @@ const pais = document.querySelector("#pais");
 const msjFormulario = document.querySelector("#msjFormulario");
 const spanDescripcion = document.querySelector("#spanDescripcion");
 const datosTablaPelicula = document.querySelector("tbody");
+const formAdministrarPelicula = document.getElementById("formAdministrarPelicula");
+const modalPelicula = new bootstrap.Modal(document.querySelector("#modalAgregar"));
 
-const formAdministrarPelicula = document.getElementById(
-  "formAdministrarPelicula"
-);
-const modalPelicula = new bootstrap.Modal(
-  document.querySelector("#modalAgregar")
-);
+let estadoPelicula = true; //true = crear peli,  false = editar pelicula
 
 // btnEditar.addEventListener("click", crearPeli);
 btnAgregar.addEventListener("click", mostrarModalPeli);
@@ -88,7 +85,21 @@ function mostrarModalPeli() {
 
 function cargarPelicula(e) {
   e.preventDefault();
+  if(estadoPelicula === true){
+    //aqui creo la peli
+    crearPelicula()
+  } else{
+    //editar la peli
+    actualizarPelicula()
+  }
+}
 
+function ocultarAlerError() {
+  msjFormulario.className = "d-none";
+  msjFormulario.innerHTML = "";
+}
+function crearPelicula(){
+  
   //validar los datos
   let sumario = sumarioValidaciones(
     titulo.value,
@@ -139,11 +150,6 @@ function cargarPelicula(e) {
     msjFormulario.innerHTML = sumario;
     setTimeout(ocultarAlerError, 8000);
   }
-}
-
-function ocultarAlerError() {
-  msjFormulario.className = "d-none";
-  msjFormulario.innerHTML = "";
 }
 
 function guardarEnLocalStorage() {
@@ -198,7 +204,9 @@ window.borrarPelicula = (codigo) => {
       datosTablaPelicula.removeChild(datosTablaPelicula.children[posicionPeli]);
 
       // hacer: actualizar las filas de la tabla
+      
 
+      // mostrar mensaje al usuario
       Swal.fire("Registro ELIMINADO", "Se elímino la pelicula de la base de datos", "success");
     }
   });
@@ -222,8 +230,43 @@ window.editarPelicula = (codigoUnico)=>{
   pais.value = pelicula.pais;
   reparto.value = pelicula.reparto;
 
-  
 
+  // cambiar estado de variable bandera
+  estadoPelicula = false;
+
+}
+
+function actualizarPelicula(){
+  //validar los datos
+
+  // necesito la pelicula que estoy editando
+  let posicionPelicula = listaPeliculas.findIndex(peli => peli.codigo === codigo.value)
+  // actualizar las propiedades de esa peli
+  listaPeliculas[posicionPelicula].titulo = titulo.value
+  listaPeliculas[posicionPelicula].descripcion = descripcion.value
+  listaPeliculas[posicionPelicula].imagen = imagen.value
+  listaPeliculas[posicionPelicula].genero = genero.value
+  listaPeliculas[posicionPelicula].anio = anio.value
+  listaPeliculas[posicionPelicula].duracion = duracion.value
+  listaPeliculas[posicionPelicula].pais = pais.value
+  listaPeliculas[posicionPelicula].reparto = reparto.value
+  // actualizar localstorage
+  guardarEnLocalStorage();
+  //mostrar un msj avisando lo que sucedio
+  Swal.fire(
+    'Pelicula actualziada',
+    'La pelicula seleccionada fue editada correctamente',
+    'success'
+  )
+  // que se vea en la tabla el cambio realizado
+  datosTablaPelicula.children[posicionPelicula].children[1].innerText = titulo.value
+  datosTablaPelicula.children[posicionPelicula].children[2].innerText = descripcion.value
+  datosTablaPelicula.children[posicionPelicula].children[3].innerText = imagen.value
+  datosTablaPelicula.children[posicionPelicula].children[4].innerText = genero.value
+  //limpiar el formulario
+  limpiarFormularioPeliculas();
+  //cerrar el modal
+  modalPelicula.hide()
 }
 
 
