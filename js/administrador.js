@@ -87,6 +87,7 @@ function crearFila(pelicula, indice) {
 }
 
 function mostrarModalPeli() {
+  estadoPelicula = true;
   // abrir ventana modal
   modalPelicula.show();
 }
@@ -210,6 +211,7 @@ window.borrarPelicula = (codigo) => {
       datosTablaPelicula.removeChild(datosTablaPelicula.children[posicionPeli]);
 
       // hacer: actualizar las filas de la tabla
+      // datosTablaPelicula.children[posicionPelicula].children[0]
 
       // mostrar mensaje al usuario
       Swal.fire(
