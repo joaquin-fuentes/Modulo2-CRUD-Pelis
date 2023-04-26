@@ -52,9 +52,15 @@ function mostrarPelicula(pelicula) {
       <h5 class="card-title">${pelicula.titulo}</h5>
     </div>
     <div class="card-footer">
-      <a href="./pages/detalle.html" class="btn btn-primary">Ver detalle</a>
+      <button onclick="detallePelicula('${pelicula.codigo}')" class="btn btn-primary">Detalle</button>
     </div>
   </div>
 </article>
     `;
+}
+
+window.detallePelicula = (codigo)=> {
+  // console.log(codigo)
+  // console.log(window.location.origin + "/pages/detalle.html?codigo="+codigo)
+  window.location.href = window.location.origin + "/pages/detalle.html?codigo="+codigo
 }
